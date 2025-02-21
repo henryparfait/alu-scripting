@@ -1,24 +1,26 @@
 #!/usr/bin/python3
-""" 3-count.py """
+""" API Advanced """
 import json
 import requests
 
 
 def count_words(subreddit, word_list, after="", count=[]):
-    """ keywords """
-
+    """ API Advanced """
     if after == "":
         count = [0] * len(word_list)
 
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    request = requests.get(url,
-                           params={'after': after},
-                           allow_redirects=False,
-                           headers={'User-Agent': 'Mozilla/5.0'})
+    headers = {'User-Agent': 'linux:0:1.0 (by /u/JuiceExtension6952)'}
+    params = {'after': after}
+
+    request = requests.get(
+        url,
+        params=params,
+        allow_redirects=False,
+        headers=headers)
 
     if request.status_code == 200:
         data = request.json()
-
         for topic in (data['data']['children']):
             for word in topic['data']['title'].split():
                 for i in range(len(word_list)):
