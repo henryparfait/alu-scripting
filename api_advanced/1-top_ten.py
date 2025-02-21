@@ -8,7 +8,7 @@ def top_ten(subreddit):
     if not return 0."""
 
     headers = {'User-Agent': 'MyAPI/0.0.1'}
-    subreddit_url = "https://www.reddit.com/r/{}/Warframe/".format(subreddit)
+    subreddit_url = "https://reddit.com/r/{}/hot.json".format(subreddit)
     response = requests.get(subreddit_url, headers=headers)
 
     if response.status_code == 200:
