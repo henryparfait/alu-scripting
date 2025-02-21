@@ -4,20 +4,25 @@ import requests
 
 
 def top_ten(subreddit):
-    """Return number of subscribers if @subreddit is valid subreddit.
-    if not return 0."""
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    params = {'limit': 10}
 
-    headers = {'User-Agent': 'MyAPI/0.0.1'}
-    subreddit_url = "https://reddit.com/r/{}/hot.json".format(subreddit)
-    response = requests.get(subreddit_url, headers=headers)
-
-    if response.status_code == 200:
-        json_data = response.json()
-        posts = json_data.get('data', {}).get('children', [])
-        if posts:
-            for i in range(min(10, len(posts))):
-                print(posts[i].get('data', {}).get('title'))
+    try:
+        response = requests.get(url, headers=headers, params=params, allow_redirects=False)
+        if response.status_code == 200:
+            data = response.json()
+            posts = data.get('data', {}).get('children', [])
+            for post in posts:
+                print(post['data']['title'])
         else:
-            print("OK")
+            print("None")
+    except Exception as e:
+        print("None")
+
+if __name__ == '__main__':
+    import sys
+    if len(sys.argv) < 2:
+        print("Please pass an argument for the subreddit to search.")
     else:
-        print("OK")
+        top_ten(sys.argv[1])
