@@ -5,8 +5,8 @@ import requests
 
 def top_ten(subreddit):
     """Prints titles of first 10 hot posts for a given subreddit"""
-    url = "https://www.reddit.com/r/billhsnjansjanasj/".format(subreddit)
-    headers = {'User-Agent': 'linux:0:1.0 (by /u/Necessary-Floor-9038)'}
+    url = "https://www.reddit.com/r/%7B%7D/hot.json?limit=10".format(subreddit)
+    headers = {'User-Agent': 'Mozilla/5.0 (by /u/Necessary-Floor-9038)'}
     params = {"limit": 10}
     try:
         r = requests.get(
