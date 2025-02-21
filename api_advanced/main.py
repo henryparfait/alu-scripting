@@ -1,13 +1,12 @@
 #!/usr/bin/python3
 """
-1-main
+main
 """
 import sys
 
-if __name__ == "__main__":
-    top_ten = __import__('1-top_ten').top_ten
+if __name__ == '__main__':
+    number_of_subscribers = __import__('0-subs').number_of_subscribers
     if len(sys.argv) < 2:
         print("Please pass an argument for the subreddit to search.")
     else:
-        top_ten(sys.argv[1])
-
+        print("{:d}".format(number_of_subscribers(sys.argv[1])))
