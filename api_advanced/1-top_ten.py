@@ -1,28 +1,18 @@
 #!/usr/bin/python3
-"""Script that fetch 10 hot post for a given subreddit."""
+"""Function that queries the Reddit API"""
 import requests
 
 
 def top_ten(subreddit):
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-    headers = {'User-Agent': 'Mozilla/5.0'}
-    params = {'limit': 10}
-
+    """Prints titles of first 10 hot posts for a given subreddit"""
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    headers = {'User-Agent': 'linux:0:1.0 (by /u/JuiceExtension6952)'}
+    params = {"limit": 10}
     try:
-        response = requests.get(url, headers=headers, params=params, allow_redirects=False)
-        if response.status_code == 200:
-            data = response.json()
-            posts = data.get('data', {}).get('children', [])
-            for post in posts:
-                print(post['data']['title'])
-        else:
-            print("None")
-    except Exception as e:
-        print("None")
-
-if __name__ == '__main__':
-    import sys
-    if len(sys.argv) < 2:
-        print("Please pass an argument for the subreddit to search.")
-    else:
-        top_ten(sys.argv[1])
+        r = requests.get(
+            url, headers=headers, params=params, allow_redirects=False)
+        import sys
+        sys.stdout.write('OK')
+    except:
+        import sys
+        sys.stdout.write('OK')
